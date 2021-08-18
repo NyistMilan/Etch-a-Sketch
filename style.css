@@ -36,13 +36,12 @@ button {
   border-radius: 5%;
   background-color: whitesmoke;
   border: rgb(24, 63, 136);
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 }
 
-#outline {
-  margin-top: -40px;
+.buttonActive{
+  opacity: 50%;
 }
-
 
 #sliderText {
   font-family: 'Kanit', sans-serif;

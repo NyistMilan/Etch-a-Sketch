@@ -6,16 +6,17 @@ let currentSize = defaultSize;
 let currentColor = defaultColor;
 let currentMode = defaultMode;
 
-function setSize(value){
-    currentSize = value;
+function setSize(newSize){
+    currentSize = newSize;
 }
 
-function setColor(value){
-    currentColor = value;
+function setColor(newColor){
+    currentColor = newColor;
 }
 
-function setMode(value){
-    currentMode = value;
+function setMode(newMode){
+    buttonEffect(newMode);
+    currentMode = newMode;
 }
 
 const grid = document.getElementById('grid');
@@ -23,11 +24,17 @@ const clearButton = document.getElementById('clear');
 const slider = document.getElementById('slider');
 const sliderText = document.getElementById('sliderText');
 const outlineButton = document.getElementById('outline');
+const colorPicker = document.getElementById('colorPicker');
+const eraserButton = document.getElementById('erase');
+const colorButton = document.getElementById('color');
 
 clearButton.onclick = () => clearGrid();
 slider.onmousemove = (e) => setSliderValue(e.target.value);
 slider.onchange = (e) => changeSize(e.target.value);
 outlineButton.onclick = () => toggleOutline();
+colorPicker.onchange = (e) => setColor(e.target.value)
+eraserButton.onclick = (e) => setMode('eraser');
+colorButton.onclick = (e) => setMode('color');
 
 function toggleOutline(){
     grid.childNodes.forEach((element) => {
@@ -39,7 +46,6 @@ function toggleOutline(){
         }
     });
 }
-
 
 function changeSize(value){
     setSize(value);
@@ -59,9 +65,7 @@ function makeGrid(size, needOutline){
         const gridElement = document.createElement('div');
         if(!needOutline)
             gridElement.classList.add('unit');
-        gridElement.addEventListener('click', function(e){
-            e.target.style.backgroundColor = '#333333';
-        });
+        gridElement.addEventListener('click', chooseColor);
         grid.appendChild(gridElement);
     }
 }
@@ -72,7 +76,6 @@ function resetGrid(){
 
 function clearGrid(){
     let needOutline = true;
-    console.log(grid.firstChild.className);
 
     if(grid.firstChild.className == 'unit')
     needOutline = false;
@@ -81,6 +84,28 @@ function clearGrid(){
     makeGrid(currentSize, needOutline);
 }
 
+function chooseColor(e){
+    if(currentMode === 'color'){
+        e.target.style.backgroundColor = currentColor;
+    }
+    else if(currentMode === 'eraser'){
+        e.target.style.backgroundColor = '#F5F5F5';
+    }
+}
+
+function buttonEffect(newMode){
+    if(currentMode === 'color')
+        colorButton.classList.remove('buttonActive');
+    else if(currentMode === 'eraser')
+        eraserButton.classList.remove('buttonActive');
+
+    if(newMode === 'color')
+        colorButton.classList.add('buttonActive');
+    else if(newMode === 'eraser')
+        eraserButton.classList.add('buttonActive');
+}
+
 window.onload = () => {
     makeGrid(defaultSize, false);
+    buttonEffect(defaultMode);
 }
