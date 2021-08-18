@@ -14,7 +14,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  gap: 50px;
   margin-right: 250px;
 }
 
@@ -26,7 +26,7 @@ h1 {
   margin-bottom: -15px;
 }
 
-#clear{
+button {
   font-family: 'Kanit', sans-serif;
   font-weight: 900;
   font-size: 30px;
@@ -37,6 +37,10 @@ h1 {
   background-color: whitesmoke;
   border: rgb(24, 63, 136);
   margin-bottom: 100px;
+}
+
+#outline {
+  margin-top: -40px;
 }
 
 
@@ -53,7 +57,13 @@ h1 {
     height: 500px;
     box-shadow: rgba(0, 0, 0, 0.24) 10px 10px 15px;
     background-color: whitesmoke;
-  }
+}
+
+.unit {
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: black;
+}
 
 footer {
   display: flex;
