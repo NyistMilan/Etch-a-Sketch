@@ -6,9 +6,36 @@ let currentSize = defaultSize;
 let currentColor = defaultColor;
 let currentMode = defaultMode;
 
+function setSize(value){
+    currentSize = value;
+}
+
+function setColor(value){
+    currentColor = value;
+}
+
+function setMode(value){
+    currentMode = value;
+}
+
 const grid = document.getElementById('grid');
+const clearButton = document.getElementById('clear');
+const slider = document.getElementById('slider');
+const sliderText = document.getElementById('sliderText');
 
+clearButton.onclick = () => clearGrid();
+slider.onmousemove = (e) => setSliderValue(e.target.value);
+slider.onchange = (e) => changeSize(e.target.value);
 
+function changeSize(value){
+    setSize(value);
+    setSliderValue(value);
+    clearGrid();
+}
+
+function setSliderValue(value){
+    sliderText.textContent = value + " x " + value;
+}
 
 function makeGrid(size){
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
@@ -16,7 +43,9 @@ function makeGrid(size){
 
     for (let i = 0; i < size * size; i++) {
         const gridElement = document.createElement('div');
-        gridElement.addEventListener('mouseover', changeColor);
+        gridElement.addEventListener('mouseover', function(e){
+            e.target.style.backgroundColor = '#333333';
+        });
         grid.appendChild(gridElement);
     }
 }
@@ -27,13 +56,7 @@ function resetGrid(){
 
 function clearGrid(){
     resetGrid();
-    makeGrid(defaultSize);
-}
-
-function changeColor(e){
-    if(currentMode === 'color'){
-        e.target.style.backgroundColor = currentColor;
-    }
+    makeGrid(currentSize);
 }
 
 window.onload = () => {
