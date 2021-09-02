@@ -26,6 +26,12 @@ h1 {
   margin-bottom: -15px;
 }
 
+#colorPicker{
+  margin-bottom: 30px;
+  width: 200px;
+  height: 40px;
+}
+
 button {
   font-family: 'Kanit', sans-serif;
   font-weight: 900;
@@ -64,7 +70,7 @@ button {
   border-color: black;
 }
 
-footer {
+.footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,9 +83,4 @@ footer {
 
 .copyright {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-img:hover{
-  width: 33px;
-  height: auto;
 }
